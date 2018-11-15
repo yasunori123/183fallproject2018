@@ -1,107 +1,129 @@
-<!DOCTYPE html>
-
-<html>
-  
-  <head>
+{{extend 'layout.html'}}
+{{block head}}
+    <script src="{{=URL('static', 'js/vue.js')}}"></script>
+    <!-- Calling our css file  -->
     <link href="{{=URL('static', 'css/myapp.css')}}" rel="stylesheet" type="text/css" />
-  </head>
-  <script src="{{=URL('static', 'js/default_index.js')}}"></script>
+    <!-- API to route to other pages besides the main page.  -->
+    <script> 
+      var go_to_backlog_graph_page = "{{=URL('api', 'get_post_list')}}";
+    </script>
 
-<body>
-    <!-- Create the Side Navigation Bar -->
-    <div id="mySidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="#">Dashboard</a>
-        <a href="#">Backlog Graph</a>
-        <a href="#">Work Done Graph</a>
-        <a href="#">Progress Graph</a>
-        <a href="#">Account Settings</a>
+{{end}}
+
+
+
+<div class="main_content">
+    <div id="vue-div" class="display:none">
+
+      <!-- Create the Side Navigation Bar -->
+      <div id="mySidenav" class="sidenav">
+          <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+          <span v-on:click="go_to_backlog_graph">
+              <a href="{{=URL('default','backlog')}}" > Work Done Graph</a>
+          </span>
+          <span v-on:click="go_to_work_done_graph">
+              <a href="{{=URL('default','backlog')}}" > Work Done Graph</a>
+            </span>
+          <span v-on:click="go_to_progress_graph">
+              <a href="{{=URL('default','backlog')}}" > Progress Graph </a>
+          </span>
+          <span v-on:click="go_to_account_settings">
+              <a href="{{=URL('default','backlog')}}" > Account Settings </a>
+          </span>
+      </div>
+
+      <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu </span> 
+
+
+
+      <div id="main">
+
+        <!-- Main Page to login with user name and password-->
+        Username: <input type="text" name="login_username"><br>
+        Password: <input type="text" name="login_password"><br>
+        <input type="submit" value="Log In">
+        <input type="submit" value="Sign Up">
+    
+        <br > <br> 
+    
+    
+        <!-- Another page for user to be able to register with their info-->
+        First Name: <input type="text" name="register_firstname"><br>
+        Last Name : <input type="text" name="register_lastname"><br>
+        Email  : <input type="text" name="register_email"><br>
+        Password : <input type="text" name="register_password"><br>
+        <input type="submit" value="Register">
+        <br><br>
+
+    
+        <!-- Allow user to upload their profile picture -->
+        <h1> Choose a profile picture! </h1>
+        <form action="/action_page.php">
+          <input type="file" name="pic" accept="image/*">
+          <input type="submit">
+        </form>
+
+        <!-- Create  graphs for Dashboard section -->
+        
+        <h1>Graph for Artist Dashboard</h1> 
+        <canvas id="dashboardCanvas" width="500" height="500"></canvas>
+        <h1>Graph for Backlog Graph</h1> 
+        <canvas id="backlogCanvas" width="500" height="500"></canvas>
+        <h1>Graph for Work Done Graph</h1> 
+        <canvas id="workdoneCanvas" width="500" height="500"></canvas>
+        <h1>Graph for Progress Graph</h1> 
+        <canvas id="progressCanvas" width="500" height="500"></canvas>
+
+        <!-- Account Settings -->
+
+        <h1> User Profie</h1>
+        <h1> First Name </h1>
+        <h1> Last Name </h1>
+        <h1> Current Class </h1>
+        <h1> User Email </h1>
+        <h1> User Team Name </h1>
+
+
     </div>
 
-    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu </span>
 
-    <div id="main">
-
-      <!-- Main Page to login with user name and password-->
-      Username: <input type="text" name="login_username"><br>
-      Password: <input type="text" name="login_password"><br>
-      <input type="submit" value="Log In">
-      <input type="submit" value="Sign Up">
-  
-      <br > <br> 
-  
-  
-      <!-- Another page for user to be able to register with their info-->
-      First Name: <input type="text" name="register_firstname"><br>
-      Last Name : <input type="text" name="register_lastname"><br>
-      Email  : <input type="text" name="register_email"><br>
-      Password : <input type="text" name="register_password"><br>
-      <input type="submit" value="Register">
-      <br><br>
-  
-  
-      <!-- Allow user to upload their profile picture -->
-      <h1> Choose a profile picture! </h1>
-      <form action="/action_page.php">
-        <input type="file" name="pic" accept="image/*">
-        <input type="submit">
-      </form>
-
-      <!-- Create  graphs for Dashboard section -->
-      
-      <h1>Graph for Artist Dashboard</h1> 
-      <canvas id="dashboardCanvas" width="500" height="500"></canvas>
-      <h1>Graph for Backlog Graph</h1> 
-      <canvas id="backlogCanvas" width="500" height="500"></canvas>
-      <h1>Graph for Work Done Graph</h1> 
-      <canvas id="workdoneCanvas" width="500" height="500"></canvas>
-      <h1>Graph for Progress Graph</h1> 
-      <canvas id="progressCanvas" width="500" height="500"></canvas>
-
-
-
+    <!-- Script to draw on the canvas!-->
+    <script>
+      // Dashboard Graph
+        var canvas = document.getElementById("dashboardCanvas");
+        var ctx = canvas.getContext("2d");
+        ctx.fillStyle = "#FF0000";
+        ctx.fillRect(200,200,50,50);
+        ctx.moveTo(0,0);
+        ctx.lineTo(500,500);
+        ctx.stroke();
+      // Backlog Graph
+      var canvas = document.getElementById("backlogCanvas");
+        var ctx = canvas.getContext("2d");
+        ctx.fillStyle = "#FFA500";
+        ctx.fillRect(200,200,50,50);
+        ctx.moveTo(0,0);
+        ctx.lineTo(200,100);
+        ctx.stroke();
+    // Work Done Graph
+    var canvas = document.getElementById("workdoneCanvas");
+        var ctx = canvas.getContext("2d");
+        ctx.fillStyle = "#FFFF00";
+        ctx.fillRect(200,200,50,50);
+        ctx.moveTo(0,0);
+        ctx.lineTo(200,100);
+        ctx.stroke();
+      // Progress  Graph
+      var canvas = document.getElementById("progressCanvas");
+        var ctx = canvas.getContext("2d");
+        ctx.fillStyle = "#008000";
+        ctx.fillRect(200,200,50,50);
+        ctx.moveTo(0,0);
+        ctx.lineTo(200,100);
+        ctx.stroke();
+    </script>
   </div>
 
+</div>
 
-  <!-- Script to draw on the canvas!-->
-  <script>
-    // Dashboard Graph
-      var canvas = document.getElementById("dashboardCanvas");
-      var ctx = canvas.getContext("2d");
-      ctx.fillStyle = "#FF0000";
-      ctx.fillRect(200,200,50,50);
-      ctx.moveTo(0,0);
-      ctx.lineTo(500,500);
-      ctx.stroke();
-     // Backlog Graph
-     var canvas = document.getElementById("backlogCanvas");
-      var ctx = canvas.getContext("2d");
-      ctx.fillStyle = "#FFA500";
-      ctx.fillRect(200,200,50,50);
-      ctx.moveTo(0,0);
-      ctx.lineTo(200,100);
-      ctx.stroke();
-   // Work Done Graph
-   var canvas = document.getElementById("workdoneCanvas");
-      var ctx = canvas.getContext("2d");
-      ctx.fillStyle = "#FFFF00";
-      ctx.fillRect(200,200,50,50);
-      ctx.moveTo(0,0);
-      ctx.lineTo(200,100);
-      ctx.stroke();
-     // Progress  Graph
-     var canvas = document.getElementById("progressCanvas");
-      var ctx = canvas.getContext("2d");
-      ctx.fillStyle = "#008000";
-      ctx.fillRect(200,200,50,50);
-      ctx.moveTo(0,0);
-      ctx.lineTo(200,100);
-      ctx.stroke();
-
-
-
-  </script>
-
-</body>
-
-</html>
+<script src="{{=URL('static', 'js/default_index.js')}}"></script>
