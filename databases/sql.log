@@ -53,3 +53,31 @@ CREATE TABLE "auth_cas"(
     "renew" CHAR(1)
 );
 success!
+timestamp: 2018-11-15T22:51:00.262000
+CREATE TABLE "project_details"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "num_of_user_stories" CHAR(512)
+);
+success!
+timestamp: 2018-11-17T16:29:55.548000
+ALTER TABLE "project_details" ADD "num_of_sprints" CHAR(512);
+timestamp: 2018-11-17T16:29:55.591000
+ALTER TABLE "project_details" ADD "length_of_sprints" CHAR(512);
+success!
+timestamp: 2018-11-17T16:30:55.339000
+CREATE TABLE "user_stories"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "user_story_num" CHAR(512),
+    "user_story_points" CHAR(512)
+);
+success!
+timestamp: 2018-11-17T16:53:33.962000
+ALTER TABLE "project_details" ADD "sprint_start_date" CHAR(512);
+success!
+timestamp: 2018-11-18T16:51:15.618000
+CREATE TABLE "work_completed"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "sprint_number" CHAR(512),
+    "story_points" CHAR(512)
+);
+success!

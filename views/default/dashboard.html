@@ -1,0 +1,91 @@
+{{extend 'layout.html'}}
+
+{{block head}}
+    <script src="{{=URL('static', 'js/vue.js')}}"></script>
+    
+    <!-- Calling our css file  -->
+    <link href="{{=URL('static', 'css/myapp.css')}}" rel="stylesheet" type="text/css" />
+    <!-- API to route to other pages besides the main page.  -->
+    <script> 
+      var set_project_details = "{{=URL('api', 'set_project_details')}}";
+      var set_user_story_points = "{{=URL('api', 'set_user_story_points')}}";
+    </script>
+
+{{end}}
+
+ 
+<div id="vue-div" class="display:none">
+    
+  <!-- Menu  -->
+  <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu </span> 
+  <!-- Create the Side Navigation Bar -->
+  <div id="mySidenav" class="sidenav">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <span >
+      <a href="{{=URL('default', 'dashboard')}}" > Dashboard </a>
+      </span>
+      <span v-on:click="go_to_backlog_graph">
+          <a href="{{=URL('default', 'backlog')}}" > Backlog Graph</a>
+      </span>
+      <span v-on:click="go_to_work_done_graph">
+          <a href="{{=URL('default','work_done')}}" > Work Done Graph</a>
+      </span>
+      <span v-on:click="go_to_progress_graph">
+          <a href="{{=URL('default','progress')}}" > Progress Graph </a>
+      </span>
+      <span v-on:click="go_to_account_settings">
+          <a href="{{=URL('default','account_settings')}}" > Account Settings </a>
+      </span>
+  </div>
+
+  <div id = "main">
+    
+
+        <!-- Allow user to upload their profile picture -->
+        <div>
+            <h1> Choose a profile picture! </h1>
+            <input type="file" name="pic" accept="image/*">
+            <input type="submit">
+        </div>
+
+
+        <!-- Get project information  -->
+        <div>
+            <!-- Number of stories -->
+            <div>
+                Number of User Stories <input type="number" id="numberOfUserStories" min="1">
+                <button v-on:click="create_user_story_table"> Add story points! </button>
+            </div>
+
+            <!-- Create a table to assign points to each user story -->
+
+            <div display: inline-block id = "userStoryTable">
+            </div>
+
+
+            <!-- Number of sprints-->
+            <div>
+                Number of Sprints <input type="number" id="numberOfSprints" min="1">
+
+            </div>
+
+            <!-- Length of sprints  -->
+            <div>
+                How long is a sprint? (days) <input type="number" id="lengthOfSprint" min="1">
+            </div>
+
+            <!-- Beginning date of sprints -->
+            <div>
+                Start Sprint on: <input type="date" id="sprintStartDate">
+            </div>
+
+            <!-- Submit all info to our JS file -->
+            Project Details <input v-on:click="set_project_details" type="submit">
+            User Story <input v-on:click="set_user_story_details" type="submit">
+    </div>
+</div>
+
+
+</div>
+
+<script src="{{=URL('static', 'js/default_index.js')}}"></script>

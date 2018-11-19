@@ -4,9 +4,16 @@
     <script src="{{=URL('static', 'js/vue.js')}}"></script>
     <!-- Calling our css file  -->
     <link href="{{=URL('static', 'css/myapp.css')}}" rel="stylesheet" type="text/css" />
-    <!-- Get story points -->
+    <!-- API to route to other pages besides the main page.  -->
     <script> 
-      var get_story_points = "{{=URL('api', 'get_story_points')}}";
+      var get_work_done_data = "{{=URL('api', 'get_work_done_data')}}";
+    //   Get project details
+    var get_project_details = "{{=URL('api', 'get_project_details')}}";
+    // Set completed work so far 
+    var set_work_done_data = "{{=URL('api', 'set_work_done_data')}}";
+    // Get work completed so far
+    var get_work_done_data = "{{=URL('api', 'get_work_done_data')}}";
+    
     </script>
 
 {{end}}
@@ -14,15 +21,10 @@
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 <div id="vue-div" class="display:none">
-  
     <!-- Menu  -->
-
     <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu </span> 
-
     <!-- Create the Side Navigation Bar -->
-
     <div id="mySidenav" class="sidenav">
-
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <span >
         <a href="{{=URL('default', 'dashboard')}}" > Dashboard </a>
@@ -39,22 +41,23 @@
         <span v-on:click="go_to_account_settings">
             <a href="{{=URL('default','account_settings')}}" > Account Settings </a>
         </span>
+    </div>
+
+    <div id  = "main">
+
+        <!-- Call graph and table drawing methods -->
+        <button v-on:click="load_chart_for_work_done"> Data Table </button>
+        
+        <!-- Load Line Chart  -->
+        <div id="work_done_chart"></div>
+
+        <!--  Display Data Table -->
+        <div id="work_done_table"></div>
+        <button v-on:click="update_wd_table" id="update_wd_table"> Submit </button>
 
     </div>
 
-    <div id= "main">
-
-        <!-- Load Bar Chart  -->
-        <button v-on:click="get_backlog_story_points">aaaaaaa</button>
-        <div id="backlogChart"></div>
-        </div>
-        <!--- Display Total Story Points -->
-        <h1 id="backlogStoryPoints"> </h1>
-
-    </div>
-  
 
 </div>
-
 
 <script src="{{=URL('static', 'js/default_index.js')}}"></script>
