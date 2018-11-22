@@ -81,3 +81,30 @@ CREATE TABLE "work_completed"(
     "story_points" CHAR(512)
 );
 success!
+timestamp: 2018-11-19T17:25:04.697000
+CREATE TABLE "user_info"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "first_name" CHAR(512),
+    "last_name" CHAR(512)
+);
+success!
+timestamp: 2018-11-19T17:25:18.344000
+ALTER TABLE "user_info" ADD "class_name" CHAR(512);
+timestamp: 2018-11-19T17:25:18.385000
+ALTER TABLE "user_info" ADD "email" CHAR(512);
+success!
+timestamp: 2018-11-19T17:25:27.554000
+ALTER TABLE "user_info" ADD "password" CHAR(512);
+success!
+timestamp: 2018-11-19T17:26:00.327000
+ALTER TABLE "user_info" ADD "team_name" CHAR(512);
+success!
+timestamp: 2018-11-20T15:17:02.991000
+ALTER TABLE "user_stories" ADD "user_story_email" CHAR(512);
+success!
+timestamp: 2018-11-20T16:09:26.416000
+ALTER TABLE "work_completed" ADD "email" CHAR(512);
+success!
+timestamp: 2018-11-20T19:41:42.852000
+ALTER TABLE "user_stories" ADD "user_sprint_num" CHAR(512);
+success!

@@ -25,12 +25,24 @@ db.define_table('project_details',
                 )
 
 db.define_table('user_stories',
+                Field('user_sprint_num'),
                 Field('user_story_num'),
-                Field('user_story_points')
+                Field('user_story_points'),
+                Field('user_story_email')
                 )
 
 db.define_table('work_completed',
                 Field('sprint_number'),
-                Field('story_points')             
+                Field('story_points'),
+                Field('email'),             
+                )
+
+db.define_table('user_info',
+                Field('first_name'),
+                Field('last_name'),
+                Field('email'),
+                Field('class_name'),
+                Field('password'),
+                Field('team_name')          
                 )
 

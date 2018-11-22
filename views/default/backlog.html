@@ -25,6 +25,9 @@
 
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <span >
+            <a href="{{=URL('default', 'index')}}" > Home </a>
+        </span>
+        <span >
         <a href="{{=URL('default', 'dashboard')}}" > Dashboard </a>
         </span>
         <span v-on:click="go_to_backlog_graph">

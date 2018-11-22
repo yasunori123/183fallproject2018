@@ -22,6 +22,9 @@
   <div id="mySidenav" class="sidenav">
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
       <span >
+            <a href="{{=URL('default', 'index')}}" > Home </a>
+      </span>
+      <span >
       <a href="{{=URL('default', 'dashboard')}}" > Dashboard </a>
       </span>
       <span v-on:click="go_to_backlog_graph">
@@ -40,33 +43,13 @@
 
   <div id = "main">
     
-
-        <!-- Allow user to upload their profile picture -->
-        <div>
-            <h1> Choose a profile picture! </h1>
-            <input type="file" name="pic" accept="image/*">
-            <input type="submit">
-        </div>
-
-
         <!-- Get project information  -->
         <div>
-            <!-- Number of stories -->
-            <div>
-                Number of User Stories <input type="number" id="numberOfUserStories" min="1">
-                <button v-on:click="create_user_story_table"> Add story points! </button>
-            </div>
-
-            <!-- Create a table to assign points to each user story -->
-
-            <div display: inline-block id = "userStoryTable">
-            </div>
-
-
             <!-- Number of sprints-->
             <div>
                 Number of Sprints <input type="number" id="numberOfSprints" min="1">
-
+                <button v-on:click="add_user_story_for_sprints"> Add User Stories </button>
+                <div id="user_story_details_after_sprint"> </div>
             </div>
 
             <!-- Length of sprints  -->

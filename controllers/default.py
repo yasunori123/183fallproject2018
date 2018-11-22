@@ -6,8 +6,7 @@
 
 # ---- example index page ----
 def index():
-    response.flash = T("Hello World")
-    return dict(message=T('Welcome to web2py!'))
+    return dict()
 
 # ---- API (example) -----
 @auth.requires_login()
@@ -38,6 +37,9 @@ def dashboard():
 def account_settings():
     return dict()
 
+def home():
+    return dict()
+    
 def work_done():
     return dict()
 
